@@ -1,36 +1,49 @@
-import * as React from 'react';
+import * as React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  NavLink,
+  Route,
+} from "react-router-dom";
+import AddPost from "./AddPost";
+import Main from "./Main";
 
-class App extends React.Component<IAppProps, IAppState> {
-	constructor(props: IAppProps) {
-		super(props);
-		this.state = {
-			name: null
-		};
-	}
-
-	async componentDidMount() {
-		try {
-			let r = await fetch('/api/hello');
-			let name = await r.json();
-			this.setState({ name });
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
-	render() {
-		return (
-			<main className="container my-5">
-				<h1 className="text-primary text-center">Hello {this.state.name}!</h1>
-			</main>
-		);
-	}
-}
+const App: React.FC<IAppProps> = () => {
+  return (
+    <Router>
+      <div className="d-flex justify-content-between p-2 border border-dark shadow">
+        <h1 className="text-center">TheBennyFiles</h1>
+        <div className="d-flex justify-content-end align-items-center w-25">
+          <NavLink
+            exact to="/"
+            className="nav-link text-dark mx-1"
+            activeClassName="activeLink"
+            id="homeLink"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/add"
+            className="nav-link text-dark mx-1"
+            activeClassName="activeLink"
+            id="addLink"
+          >
+            Add Post
+          </NavLink>
+        </div>
+      </div>
+      <Switch>
+        <Route exact path="/" component={Main}></Route>
+        <Route path="/add" component={AddPost}></Route>
+      </Switch>
+    </Router>
+  );
+};
 
 export interface IAppProps {}
 
 export interface IAppState {
-	name: string;
+  name: string;
 }
 
 export default App;
