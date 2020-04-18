@@ -35,4 +35,27 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  try {
+    let id = req.params.id;
+    let body = req.body;
+    let blog = await db.Blogs.update(id, body);
+    res.json(blog);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    let id = req.params.id;
+    let blog = await db.Blogs.remove(id);
+    res.json(blog);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
 export default router;

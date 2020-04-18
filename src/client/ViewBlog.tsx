@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { IBlog } from "../utils/types";
 import { RouteComponentProps } from "react-router-dom";
 
@@ -20,6 +21,7 @@ const ViewBlog: React.FC<IViewProps> = (props) => {
       {blog.map((blog) => {
         return (
           <div
+            id="mainBlog"
             className="border-left border-right p-3 mx-auto w-75"
             key={`${blog.id}-${blog.author}-${blog.date}`}
           >
@@ -29,6 +31,11 @@ const ViewBlog: React.FC<IViewProps> = (props) => {
             <hr></hr>
             <p>{blog.content}</p>
             <hr></hr>
+            <div id="editBtn">
+              <NavLink to={`/blog/edit/${blog.id}`}>
+                <button className="btn btn-outline-dark">?</button>
+              </NavLink>
+            </div>
           </div>
         );
       })}

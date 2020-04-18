@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddPost: React.FC<IAddProps> = () => {
+const AddBlog: React.FC<IAddProps> = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
 
@@ -48,4 +48,4 @@ const AddPost: React.FC<IAddProps> = () => {
 
 interface IAddProps {}
 
-export default AddPost;
+export default AddBlog;

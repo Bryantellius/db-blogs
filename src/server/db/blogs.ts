@@ -35,8 +35,22 @@ export const add = async (body: string) => {
   });
 };
 
+export const update = async (id: string, body: string) => {
+  return new Promise<Array<any>>((resolve, reject) => {
+    Connection.query("UPDATE Blogs SET content = ? WHERE id = ?", [body, id]);
+  });
+};
+
+export const remove = async (id: string) => {
+  return new Promise<Array<any>>((resolve, reject) => {
+    Connection.query("DELETE FROM Blogs WHERE id = ?", [id]);
+  });
+};
+
 export default {
   all,
   one,
   add,
+  update,
+  remove,
 };

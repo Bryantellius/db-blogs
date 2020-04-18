@@ -5,9 +5,10 @@ import {
   NavLink,
   Route,
 } from "react-router-dom";
-import AddPost from "./AddPost";
+import AddBlog from "./AddBlog";
+import EditBlog from "./EditBlog";
 import Main from "./Main";
-import ViewBlog from './ViewBlog';
+import ViewBlog from "./ViewBlog";
 
 const App: React.FC<IAppProps> = () => {
   return (
@@ -16,7 +17,8 @@ const App: React.FC<IAppProps> = () => {
         <h1 className="text-center">TheBennyFiles</h1>
         <div className="d-flex justify-content-end align-items-center w-25">
           <NavLink
-            exact to="/"
+            exact
+            to="/"
             className="nav-link text-dark mx-1"
             activeClassName="activeLink"
             id="homeLink"
@@ -35,8 +37,9 @@ const App: React.FC<IAppProps> = () => {
       </div>
       <Switch>
         <Route exact path="/" component={Main}></Route>
-        <Route path="/add" component={AddPost}></Route>
+        <Route path="/add" component={AddBlog}></Route>
         <Route path="/blog/:id" component={ViewBlog}></Route>
+        <Route path="/blog/edit/:id" component={EditBlog}></Route>
       </Switch>
     </Router>
   );
