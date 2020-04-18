@@ -1,5 +1,5 @@
 $theme-colors: (
-  "primary": #0091ea //Covalence Blue!  :D,,,,,
+  "primary": #0091ea //Covalence Blue!  :D,,,,,,
 );
 
 #tagsNav {
@@ -14,6 +14,14 @@ $theme-colors: (
 
 .activeLink {
   border-bottom: 2px solid lightgrey;
+}
+
+.blogs {
+  width: 30%;
+}
+
+.blogs:hover {
+  border: 2px inset darkgray;
 }
 
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";

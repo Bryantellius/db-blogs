@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import AddPost from "./AddPost";
 import Main from "./Main";
+import ViewBlog from './ViewBlog';
 
 const App: React.FC<IAppProps> = () => {
   return (
@@ -35,6 +36,7 @@ const App: React.FC<IAppProps> = () => {
       <Switch>
         <Route exact path="/" component={Main}></Route>
         <Route path="/add" component={AddPost}></Route>
+        <Route path="/blog/:id" component={ViewBlog}></Route>
       </Switch>
     </Router>
   );
