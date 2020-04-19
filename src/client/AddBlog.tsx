@@ -33,6 +33,7 @@ const AddBlog: React.FC<IAddProps> = () => {
         ></input>
         <label htmlFor="tagSelect">Choose Tag:</label>
         <select id="tagSelect" className="custom-select">
+          <option value="0">No Tag</option>
           <option value="1">TMYK</option>
           <option value="2">Books</option>
           <option value="3">LOTR</option>

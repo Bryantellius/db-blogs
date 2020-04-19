@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { ITag, IFilteredTag } from "../utils/types";
-import { JsxEmit, updateJsxElement } from "typescript";
+import { ITag } from "../utils/types";
 
 const Tags: React.FC<ITagProps> = () => {
   const [tags, setTags] = useState<ITag[]>([]);
-  const [filteredTags, setFilteredTags] = useState<IFilteredTag[]>([]);
-  const [filteredList, setFilteredList] = useState<any[]>([]);
 
   useEffect(() => {
     const getTags = async () => {
@@ -28,7 +25,7 @@ const Tags: React.FC<ITagProps> = () => {
               className="list-group-item list-group-item-action"
               value={tag.id}
             >
-              {tag.name}
+              <NavLink to={`/view-tags/blogs/${tag.id}`} className="nav-link text-dark">{tag.name}</NavLink>
             </li>
           );
         })}

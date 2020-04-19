@@ -17,7 +17,7 @@ router.get("/filter/:id", async (req, res) => {
   try {
     let id = req.params.id;
     let filteredBlogs = await db.Tags.filter(id);
-    res.json(filteredBlogs);
+    res.json(filteredBlogs[0]);
   } catch (e) {
     console.log(e);
     res.sendStatus(500);

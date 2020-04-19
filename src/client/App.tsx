@@ -9,6 +9,7 @@ import AddBlog from "./AddBlog";
 import EditBlog from "./EditBlog";
 import Main from "./Main";
 import ViewBlog from "./ViewBlog";
+import ViewTaggedBlogs from "./ViewTaggedBlogs";
 
 const App: React.FC<IAppProps> = () => {
   return (
@@ -40,6 +41,7 @@ const App: React.FC<IAppProps> = () => {
         <Route path="/add" component={AddBlog}></Route>
         <Route path="/blog/edit/:id" component={EditBlog}></Route>
         <Route path="/blog/:id" component={ViewBlog}></Route>
+        <Route path="/view-tags/blogs/:id" component={ViewTaggedBlogs}></Route>
       </Switch>
     </Router>
   );

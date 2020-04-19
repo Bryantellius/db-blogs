@@ -18,6 +18,9 @@ const ViewBlog: React.FC<IViewProps> = (props) => {
 
   return (
     <>
+      <button className="btn btn-outline-dark m-3" onClick={() => history.back()}>
+        Back
+      </button>
       {blog.map((blog) => {
         return (
           <div
