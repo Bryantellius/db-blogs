@@ -38,8 +38,8 @@ const App: React.FC<IAppProps> = () => {
       <Switch>
         <Route exact path="/" component={Main}></Route>
         <Route path="/add" component={AddBlog}></Route>
-        <Route path="/blog/:id" component={ViewBlog}></Route>
         <Route path="/blog/edit/:id" component={EditBlog}></Route>
+        <Route path="/blog/:id" component={ViewBlog}></Route>
       </Switch>
     </Router>
   );

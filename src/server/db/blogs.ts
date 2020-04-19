@@ -31,19 +31,38 @@ export const one = async (id: string) => {
 
 export const add = async (body: string) => {
   return new Promise<Array<any>>((resolve, reject) => {
-    Connection.query("INSERT INTO Blogs SET ?", [body]);
+    Connection.query("INSERT INTO Blogs SET ?", [body], (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(results);
+    });
   });
 };
 
-export const update = async (id: string, body: string) => {
+export const update = async (id: string, body: any) => {
   return new Promise<Array<any>>((resolve, reject) => {
-    Connection.query("UPDATE Blogs SET content = ? WHERE id = ?", [body, id]);
+    Connection.query(
+      "UPDATE Blogs SET content = ?, title = ? WHERE id = ?",
+      [body.content, body.title, id],
+      (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+        resolve(results);
+      }
+    );
   });
 };
 
 export const remove = async (id: string) => {
   return new Promise<Array<any>>((resolve, reject) => {
-    Connection.query("DELETE FROM Blogs WHERE id = ?", [id]);
+    Connection.query("DELETE FROM Blogs WHERE id = ?", [id], (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(results);
+    });
   });
 };
 

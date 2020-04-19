@@ -17,7 +17,7 @@ const ViewBlog: React.FC<IViewProps> = (props) => {
   }, [props.match.params.id]);
 
   return (
-    <div>
+    <>
       {blog.map((blog) => {
         return (
           <div
@@ -39,7 +39,7 @@ const ViewBlog: React.FC<IViewProps> = (props) => {
           </div>
         );
       })}
-    </div>
+    </>
   );
 };
 

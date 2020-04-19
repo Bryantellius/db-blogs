@@ -28,15 +28,15 @@ const AddBlog: React.FC<IAddProps> = () => {
           id="addTitle"
           className="form-control"
           type="text"
-          onChange={(e) => setTitle(e.target.value)}
-        />
+          onChange={(e: any) => setTitle(e.target.value)}
+        ></input>
       </div>
       <div className="form-group d-flex flex-column w-50">
         <label htmlFor="addContent">Enter Content:</label>
         <textarea
           className="form-control"
           id="addContent"
-          onChange={(e) => setContent(e.target.value)}
+          onChange={(e: any) => setContent(e.target.value)}
         ></textarea>
       </div>
       <button className="btn btn-outline-dark" onClick={post}>
