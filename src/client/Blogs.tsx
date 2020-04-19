@@ -28,7 +28,7 @@ const Blogs: React.FC<IBlogsProps> = () => {
             </NavLink>
             <h6 className="text-muted">By {blog.author}</h6>
             <hr></hr>
-            <span className="date">{blog.date.slice(5, 10)}</span>
+            <span className="date">{blog.content.slice(0, 15)}...</span>
           </div>
         );
       })}

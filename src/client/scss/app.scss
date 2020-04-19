@@ -1,5 +1,5 @@
 $theme-colors: (
-  "primary": #0091ea //Covalence Blue!  :D,,,,,,,,
+  "primary": #0091ea //Covalence Blue!  :D,,,,,,,,,
 );
 
 #tagsNav {
@@ -32,6 +32,11 @@ $theme-colors: (
   position: absolute;
   top: 1rem;
   right: 1rem;
+}
+
+.tag-list:hover {
+  cursor: pointer;
+  border-bottom: 2px solid lightgrey;
 }
 
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";

@@ -36,11 +36,12 @@ const EditBlog: React.FC<IEditProps> = (props) => {
     await fetch(`/api/blogs/${props.match.params.id}`, {
       method: "DELETE",
     });
-    history.back();
+    history.go(-2);
   };
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center border border-dark shadow my-3 py-3">
+      <h1>Edit Blog</h1>
       <div className="form-group d-flex flex-column w-50">
         <label htmlFor="addTitle">Edit Title:</label>
         <input
@@ -54,6 +55,7 @@ const EditBlog: React.FC<IEditProps> = (props) => {
         <label htmlFor="addContent">Edit Content:</label>
         <textarea
           className="form-control"
+          rows={5}
           id="addContent"
           defaultValue={content}
           onChange={(e: any) => setContent(e.target.value)}
