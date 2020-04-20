@@ -9,6 +9,7 @@ const AddBlog: React.FC<IAddProps> = () => {
       title,
       content,
       authorid: 1,
+      tagid: parseInt(document.getElementsByTagName("select")[0].value)
     };
     fetch("/api/blogs", {
       method: "POST",
@@ -41,6 +42,7 @@ const AddBlog: React.FC<IAddProps> = () => {
           <option value="5">King Killer Chronicles</option>
           <option value="6">Seinfeld</option>
           <option value="7">TV</option>
+          <option value="8">Random</option>
         </select>
       </div>
       <div className="form-group d-flex flex-column w-50">

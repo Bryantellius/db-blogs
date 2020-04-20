@@ -29,14 +29,16 @@ export const one = async (id: string) => {
   });
 };
 
-export const add = async (body: string) => {
+export const add = async (body: any) => {
   return new Promise<Array<any>>((resolve, reject) => {
-    Connection.query("INSERT INTO Blogs SET ?", [body], (err, results) => {
-      if (err) {
-        return reject(err);
+    Connection.query(
+      "INSERT INTO Blogs SET title = ?, content = ?, authorid = ?",
+      [body.title, body.content, body.authorid],
+      (err, results) => {
+        if (err) reject(err);
+        resolve(results);
       }
-      resolve(results);
-    });
+    );
   });
 };
 

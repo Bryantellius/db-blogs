@@ -28,6 +28,7 @@ router.post("/", async (req, res) => {
   try {
     let body = req.body;
     let blog = await db.Blogs.add(body);
+    await db.Tags.fill(body);
     res.json(blog);
   } catch (e) {
     console.log(e);
