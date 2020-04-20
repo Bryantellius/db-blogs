@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { IBlog } from "../utils/types";
+import { IBlog } from "../../utils/types";
 
+// Function Component that fetches and renders list of blogs
 const Blogs: React.FC<IBlogsProps> = () => {
   const [blogs, setBlogs] = useState<IBlog[]>([]);
 

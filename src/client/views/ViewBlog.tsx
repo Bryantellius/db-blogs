@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { IBlog, ITag } from "../utils/types";
+import { IBlog, ITag } from "../../utils/types";
 import { RouteComponentProps } from "react-router-dom";
 
+// Functional Component that fetches blog and associated tags and render as a main view page
 const ViewBlog: React.FC<IViewProps> = (props) => {
   const [blog, setBlog] = useState<IBlog[]>([]);
   const [tags, setTags] = useState<ITag[]>([]);

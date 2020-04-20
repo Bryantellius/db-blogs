@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { ITag } from "../utils/types";
+import { ITag } from "../../utils/types";
 
+// Functional Component that fetches and renders list of tags in tags nav
 const Tags: React.FC<ITagProps> = () => {
   const [tags, setTags] = useState<ITag[]>([]);
 

@@ -106,9 +106,10 @@ export const fill = async (body: any) => {
   });
 };
 
+// Returns all tags associated with a blog
 export const tagsPerBlog = async (id: string) => {
   return new Promise<Array<any>>((resolve, reject) => {
-    Connection.query("CALL spGetBlogTags(?)", [id], (err, results) => {
+    Connection.query("CALL spBlogTags(?)", [id], (err, results) => {
       if (err) reject(err);
       resolve(results);
     });

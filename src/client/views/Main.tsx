@@ -1,16 +1,18 @@
 import React from "react";
-import News from "./News";
-import Tags from "./Tags";
+import News from "../News";
+import Tags from "../Tags";
 import Blogs from "./Blogs";
 
+// Functional Component that hosts that renders news/tags and blogs components
 const Main: React.FC<IMainProps> = () => {
+  // Function that toggles between showing news cards and tags list
   const toggleNewsNav = () => {
     if (document.getElementById("tagsNav").style.display === "block") {
       document.getElementById("tagsNav").style.display = "none";
       document.getElementById("newsNav").style.display = "block";
     }
   };
-
+  // Second function that aids in toggle feature
   const toggleTagsNav = () => {
     if ((document.getElementById("newsNav").style.display = "block")) {
       document.getElementById("newsNav").style.display = "none";

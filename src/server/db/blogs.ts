@@ -1,5 +1,6 @@
 import { Connection } from "./index";
 
+// Gets all blogs
 export const all = async () => {
   return new Promise<Array<any>>((resolve, reject) => {
     Connection.query(
@@ -14,6 +15,7 @@ export const all = async () => {
   });
 };
 
+// Gets blog based on id
 export const one = async (id: string) => {
   return new Promise<Array<any>>((resolve, reject) => {
     Connection.query(
@@ -29,6 +31,7 @@ export const one = async (id: string) => {
   });
 };
 
+// Inserts blog
 export const add = async (body: any) => {
   return new Promise<Array<any>>((resolve, reject) => {
     Connection.query(
@@ -42,6 +45,7 @@ export const add = async (body: any) => {
   });
 };
 
+// Updates blog based on id with body
 export const update = async (id: string, body: any) => {
   return new Promise<Array<any>>((resolve, reject) => {
     Connection.query(
@@ -57,6 +61,7 @@ export const update = async (id: string, body: any) => {
   });
 };
 
+// Deletes blog based on id
 export const remove = async (id: string) => {
   return new Promise<Array<any>>((resolve, reject) => {
     Connection.query("DELETE FROM Blogs WHERE id = ?", [id], (err, results) => {

@@ -19,3 +19,9 @@ export interface IFilteredTag {
   content: string;
   time: string;
 }
+
+export interface IHeadline {
+  title: string;
+  source: string;
+  url: string;
+}

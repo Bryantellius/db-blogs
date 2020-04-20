@@ -3,6 +3,7 @@ import db from "../db";
 
 const router = express.Router();
 
+// Returns an array of all blogs
 router.get("/", async (req, res) => {
   try {
     let blogs = await db.Blogs.all();
@@ -13,6 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Returns an array with a single blog
 router.get("/:id", async (req, res) => {
   try {
     let id = req.params.id;
@@ -24,6 +26,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Posts a blog
 router.post("/", async (req, res) => {
   try {
     let body = req.body;
@@ -36,6 +39,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Updates a blog
 router.put("/:id", async (req, res) => {
   try {
     let id = req.params.id;
@@ -48,6 +52,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// Deletes a blog
 router.delete("/:id", async (req, res) => {
   try {
     let id = req.params.id;

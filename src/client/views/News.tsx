@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { IHeadline } from "../../utils/types";
 
+// Functional Component that fetches news articles and renders as cards
 const News: React.FC<INewsProps> = () => {
   const [headlines, setHeadlines] = useState<IHeadline[]>([]);
 
@@ -51,11 +53,5 @@ const News: React.FC<INewsProps> = () => {
 };
 
 interface INewsProps {}
-
-interface IHeadline {
-  title: string;
-  source: string;
-  url: string;
-}
 
 export default News;

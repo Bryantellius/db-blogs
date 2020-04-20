@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+// Functional Component responsible for post new blogs via API POST
+// page format is a simple form
 const AddBlog: React.FC<IAddProps> = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
@@ -9,7 +11,7 @@ const AddBlog: React.FC<IAddProps> = () => {
       title,
       content,
       authorid: 1,
-      tagid: parseInt(document.getElementsByTagName("select")[0].value)
+      tagid: parseInt(document.getElementsByTagName("select")[0].value),
     };
     fetch("/api/blogs", {
       method: "POST",

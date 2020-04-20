@@ -5,12 +5,13 @@ import {
   NavLink,
   Route,
 } from "react-router-dom";
-import AddBlog from "./AddBlog";
-import EditBlog from "./EditBlog";
+import AddBlog from "../components/AddBlog";
+import EditBlog from "../components/EditBlog";
 import Main from "./Main";
 import ViewBlog from "./ViewBlog";
 import ViewTaggedBlogs from "./ViewTaggedBlogs";
 
+// Main Functional Component that renders main page with main content routes
 const App: React.FC<IAppProps> = () => {
   return (
     <Router>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 
+// Functional Component responsible for updating blog via API PUT request, deleting blog via API DELETE request 
+// page format is a simple form
 const EditBlog: React.FC<IEditProps> = (props) => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");

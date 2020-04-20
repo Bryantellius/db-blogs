@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { IFilteredTag } from "../utils/types";
+import { IFilteredTag } from "../../utils/types";
 import { NavLink } from "react-router-dom";
 import { RouteComponentProps } from "react-router-dom";
 
+// Functional Component that fetches tag and associated blogs and renders as a list
 const ViewTaggedBlogs: React.FC<ITaggedBlogProps> = (props) => {
   const [filteredBlogs, setFilteredBlogs] = useState<IFilteredTag[]>([]);
 
