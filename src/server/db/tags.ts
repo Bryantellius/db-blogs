@@ -13,7 +13,7 @@ export const all = async () => {
 // Returns array with blogs matching a tagid
 export const filter = async (id: string) => {
   return new Promise<Array<any>>((resolve, reject) => {
-    Connection.query(`CALL spFilterBlogs(?)`, [id], (err, results) => {
+    Connection.query(`CALL spBlogTags(?)`, [id], (err, results) => {
       if (err) reject(err);
       resolve(results);
     });

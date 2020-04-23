@@ -11,8 +11,8 @@ const EditBlog: React.FC<IEditProps> = (props) => {
     let res = await fetch(`/api/blogs/${props.match.params.id}`);
     let blog = await res.json();
 
-    setTitle(blog[0].title);
-    setContent(blog[0].content);
+    setTitle(blog.title);
+    setContent(blog.content);
   };
 
   useEffect(() => {

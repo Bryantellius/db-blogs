@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, RouteComponentProps } from "react-router-dom";
 import { IBlog, ITag } from "../../utils/types";
-import { RouteComponentProps } from "react-router-dom";
 
 // Functional Component that fetches blog and associated tags and render as a main view page
 const ViewBlog: React.FC<IViewProps> = (props) => {
-  const [blog, setBlog] = useState<IBlog[]>([]);
+  const [blog, setBlog] = useState<IBlog>(null);
   const [tags, setTags] = useState<ITag[]>([]);
 
   const getBlog = async () => {
@@ -33,34 +32,29 @@ const ViewBlog: React.FC<IViewProps> = (props) => {
       >
         Back
       </button>
-      {blog.map((blog) => {
-        return (
-          <div
-            id="mainBlog"
-            className="border-left border-right p-3 mx-auto w-75"
-            key={`${blog.id}-${blog.author}-${blog.date}`}
-          >
-            <h1>{blog.title}</h1>
-            <div className="my-3">
-              {tags.map((tag) => (
-                <NavLink to={`/view-tags/blogs/${tag.id}`}>
-                  <span className="badge badge-dark p-2 mx-1">{tag.name}</span>
-                </NavLink>
-              ))}
-            </div>
-            <h6 className="text-muted">By {blog.author}</h6>
-            <span className="date">Written {blog.date.slice(5, 10)}</span>
-            <hr></hr>
-            <p>{blog.content}</p>
-            <hr></hr>
-            <div id="editBtn">
-              <NavLink to={`/blog/edit/${blog.id}`}>
-                <button className="btn btn-outline-dark">?</button>
-              </NavLink>
-            </div>
-          </div>
-        );
-      })}
+      <div id="mainBlog" className="border-left border-right p-3 mx-auto w-75">
+        <h1>{blog?.title}</h1>
+        <div className="my-3">
+          {tags.map((tag) => (
+            <NavLink
+              to={`/view-tags/blogs/${tag.id}`}
+              key={`${tag.id}-${tag.name}`}
+            >
+              <span className="badge badge-dark p-2 mx-1">{tag.name}</span>
+            </NavLink>
+          ))}
+        </div>
+        <h6 className="text-muted">By {blog?.author}</h6>
+        <span className="date">Written {blog?.date.slice(5, 10)}</span>
+        <hr></hr>
+        <p>{blog?.content}</p>
+        <hr></hr>
+        <div id="editBtn">
+          <NavLink to={`/blog/edit/${blog?.id}`}>
+            <button className="btn btn-outline-dark">?</button>
+          </NavLink>
+        </div>
+      </div>
     </>
   );
 };

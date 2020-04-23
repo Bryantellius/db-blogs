@@ -1,10 +1,11 @@
 import { Connection } from "./index";
+import type { IBlog, IAuthor } from "../utils/types";
 
 // Gets all blogs
 export const all = async () => {
-  return new Promise<Array<any>>((resolve, reject) => {
+  return new Promise<(IBlog | IAuthor)[]>((resolve, reject) => {
     Connection.query(
-      "SELECT b.id, a.name as author, b.title, b.content, b._created as date FROM Blogs b JOIN Authors a ON a.id = b.authorid",
+      "SELECT b.id, a.firstname as author, b.title, b.content, b._created as date FROM Blogs b JOIN Authors a ON a.id = b.authorid",
       (err, results) => {
         if (err) {
           return reject(err);
@@ -16,10 +17,10 @@ export const all = async () => {
 };
 
 // Gets blog based on id
-export const one = async (id: string) => {
-  return new Promise<Array<any>>((resolve, reject) => {
+export const one = async (id: number) => {
+  return new Promise<(IBlog | IAuthor)[]>((resolve, reject) => {
     Connection.query(
-      "SELECT b.id, a.name as author, b.title, b.content, b._created as date FROM Blogs b JOIN Authors a ON a.id = b.authorid WHERE b.id = ?",
+      "SELECT b.id, a.firstname as author, b.title, b.content, b._created as date FROM Blogs b JOIN Authors a ON a.id = b.authorid WHERE b.id = ?",
       [id],
       (err, results) => {
         if (err) {
@@ -32,8 +33,8 @@ export const one = async (id: string) => {
 };
 
 // Inserts blog
-export const add = async (body: any) => {
-  return new Promise<Array<any>>((resolve, reject) => {
+export const add = async (body: IBlog) => {
+  return new Promise<{ blogId: number }>((resolve, reject) => {
     Connection.query(
       "INSERT INTO Blogs SET title = ?, content = ?, authorid = ?",
       [body.title, body.content, body.authorid],
@@ -46,8 +47,8 @@ export const add = async (body: any) => {
 };
 
 // Updates blog based on id with body
-export const update = async (id: string, body: any) => {
-  return new Promise<Array<any>>((resolve, reject) => {
+export const update = async (id: number, body: IBlog) => {
+  return new Promise<{ affectedRows: number }>((resolve, reject) => {
     Connection.query(
       "UPDATE Blogs SET content = ?, title = ? WHERE id = ?",
       [body.content, body.title, id],
@@ -62,8 +63,8 @@ export const update = async (id: string, body: any) => {
 };
 
 // Deletes blog based on id
-export const remove = async (id: string) => {
-  return new Promise<Array<any>>((resolve, reject) => {
+export const remove = async (id: number) => {
+  return new Promise<{ affectedRows: number }>((resolve, reject) => {
     Connection.query("DELETE FROM Blogs WHERE id = ?", [id], (err, results) => {
       if (err) {
         return reject(err);
