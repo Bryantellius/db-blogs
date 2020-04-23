@@ -1,12 +1,12 @@
 import * as mysql from "mysql";
 import config from "../config";
-import Blogs from "./blogs";
-import Tags from "./tags";
 
-export const Connection = mysql.createConnection(config.mysql);
+// Table query imports
+import Blogs from "./queries/blogs";
+import Tags from "./queries/tags";
+import Users from "./queries/users";
+import Tokens from "./queries/tokens";
 
-Connection.connect((err) => {
-  if (err) console.log(err);
-});
+export const Connection = mysql.createPool(config.mysql);
 
-export default { Blogs, Tags };
+export default { Blogs, Tags, Users, Tokens };

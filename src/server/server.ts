@@ -2,13 +2,19 @@ import * as express from "express";
 import * as morgan from "morgan";
 import apiRouter from "./router";
 import * as path from "path";
+import * as passport from "passport";
 import config from "./config";
 import type { Error } from "./utils/types";
 
+import "./middleware/localstrategy";
+import "./middleware/bearerstrategy";
+
 const app = express();
 
-app.use(express.json());
 app.use(express.static("public"));
+app.use(express.json());
+app.use(passport.initialize());
+
 app.use(morgan("dev"));
 app.use("/api", apiRouter);
 

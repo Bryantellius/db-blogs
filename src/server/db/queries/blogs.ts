@@ -1,5 +1,5 @@
-import { Connection } from "./index";
-import type { IBlog, IAuthor } from "../utils/types";
+import { Connection } from "../index";
+import type { IBlog, IAuthor } from "../../utils/types";
 
 // Gets all blogs
 export const all = async () => {

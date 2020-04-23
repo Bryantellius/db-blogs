@@ -1,4 +1,4 @@
-import { Connection } from "./index";
+import { Connection } from "../index";
 
 // Returns array list of each tag name
 export const all = async () => {
