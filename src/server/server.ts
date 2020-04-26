@@ -1,6 +1,6 @@
 import * as express from "express";
 import * as morgan from "morgan";
-import apiRouter from "./router";
+import router from "./router";
 import * as path from "path";
 import * as passport from "passport";
 import config from "./config";
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(passport.initialize());
 
 app.use(morgan("dev"));
-app.use("/api", apiRouter);
+app.use(router);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));

@@ -1,11 +1,11 @@
 import * as express from "express";
-import tagRouter from "./tagRouter";
-import blogRouter from "./blogRouter";
+import apiRouter from "./api";
+import authRouter from "./auth";
 
 const router = express.Router();
 
-router.use("/blogs", blogRouter);
+router.use("/api", apiRouter);
 
-router.use("/tags", tagRouter);
+router.use("/auth", authRouter);
 
 export default router;

@@ -1,3 +1,5 @@
+import { RequestHandler } from "express";
+
 export type Error = {
   status?: number;
   message?: string;

@@ -1,6 +1,6 @@
 import React from "react";
-import News from "./News";
-import Tags from "./Tags";
+import News from "../components/News";
+import Tags from "../components/Tags";
 import Blogs from "./Blogs";
 
 // Functional Component that hosts that renders news/tags and blogs components

@@ -27,7 +27,17 @@ const findOneById = async (id: number) => {
   });
 };
 
+const Insert = async (user: any) => {
+  return new Promise<IAuthor[]>((resolve, reject) => {
+    Connection.query(
+      `INSERT INTO authors (email, firstname, lastname, password) VALUES ?`,
+      user
+    );
+  });
+};
+
 export default {
   findOneByEmail,
   findOneById,
+  Insert,
 };
