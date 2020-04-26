@@ -3,30 +3,39 @@ import db from "../../db";
 
 const router = express.Router();
 
-// Returns an array of all blogs or one blog
-router.get("/:id?", async (req, res, next) => {
-  let id = Number(req.params.id);
-  if (id) {
-    try {
-      let [blog] = await db.Blogs.one(id);
-      res.json(blog);
-    } catch (e) {
-      console.log(e);
-      next(e);
-    }
+const isLoggedIn: express.RequestHandler = (req: any, res, next) => {
+  if (!req.user || req.user.role !== "guest") {
+    return res.sendStatus(401);
   } else {
-    try {
-      let blogs = await db.Blogs.all();
-      res.json(blogs.reverse());
-    } catch (e) {
-      console.log(e);
-      next(e);
-    }
+    next();
+  }
+};
+
+// Returns an array of all blogs
+router.get("/", async (req, res, next) => {
+  try {
+    let blogs = await db.Blogs.all();
+    res.json(blogs.reverse());
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+});
+
+// Returns one blog by id
+router.get("/:id?", isLoggedIn, async (req, res, next) => {
+  let id = Number(req.params.id);
+  try {
+    let [blog] = await db.Blogs.one(id);
+    res.json(blog);
+  } catch (e) {
+    console.log(e);
+    next(e);
   }
 });
 
 // Posts a blog
-router.post("/", async (req, res, next) => {
+router.post("/", isLoggedIn, async (req, res, next) => {
   try {
     let body = req.body;
     let blog = await db.Blogs.add(body);
@@ -39,7 +48,7 @@ router.post("/", async (req, res, next) => {
 });
 
 // Updates a blog
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", isLoggedIn, async (req, res, next) => {
   try {
     let id = Number(req.params.id);
     let body = req.body;
@@ -52,7 +61,7 @@ router.put("/:id", async (req, res, next) => {
 });
 
 // Deletes a blog
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", isLoggedIn, async (req, res, next) => {
   try {
     let id = Number(req.params.id);
     let blog = await db.Blogs.remove(id);
