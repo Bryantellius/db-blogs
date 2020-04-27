@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { IHeadline } from "../../utils/types";
+import { IHeadline } from "../utils/types";
 
 // Functional Component that fetches news articles and renders as cards
 const News: React.FC<INewsProps> = () => {

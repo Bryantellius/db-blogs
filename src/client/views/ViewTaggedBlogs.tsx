@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { IFilteredTag } from "../../utils/types";
+import { IFilteredTag } from "../utils/types";
+import { apiService } from "../utils/apiService";
 import { NavLink } from "react-router-dom";
 import { RouteComponentProps } from "react-router-dom";
 
@@ -8,8 +9,7 @@ const ViewTaggedBlogs: React.FC<ITaggedBlogProps> = (props) => {
   const [filteredBlogs, setFilteredBlogs] = useState<IFilteredTag[]>([]);
 
   const getFilteredBlogs = async () => {
-    let res = await fetch(`/api/tags/filter/${props.match.params.id}`);
-    let blogs = await res.json();
+    let blogs = await apiService(`/api/tags/filter/${props.match.params.id}`);
     setFilteredBlogs(blogs);
   };
 

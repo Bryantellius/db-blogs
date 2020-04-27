@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { IBlog } from "../../utils/types";
+import { IBlog } from "../utils/types";
+import { apiService } from "../utils/apiService";
 
 // Function Component that fetches and renders list of blogs
 const Blogs: React.FC<IBlogsProps> = () => {
   const [blogs, setBlogs] = useState<IBlog[]>([]);
 
   const getBlogs = async () => {
-    let res = await fetch(`/api/blogs`);
-    let blogs = await res.json();
+    let blogs = await apiService(`/api/blogs`);
     setBlogs(blogs);
   };
 

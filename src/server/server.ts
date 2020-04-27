@@ -30,7 +30,7 @@ app.use(
     next: express.NextFunction
   ) => {
     res.sendStatus(err.status || 500);
-    res.json({ errors: { err: err.message } });
+    res.json({ errors: { msg: err.message } });
   }
 );
 

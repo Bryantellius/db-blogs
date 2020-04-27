@@ -14,8 +14,6 @@ export const CreateToken = async (payload: IPayload) => {
 
 export const ValidToken = async (token: string) => {
   let payload: IPayload = <IPayload>jwt.decode(token);
-  console.log(`pyactk: ${payload.accesstokenid}`);
-  console.log(`token: ${token}`);
   let [accesstokenid] = await db.Tokens.findOne(payload.accesstokenid, token);
   if (!accesstokenid) {
     throw new Error("Invalid token!");

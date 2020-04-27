@@ -1,26 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
+import { apiService, User } from "../../utils/apiService";
+import { useHistory } from "react-router-dom";
 
 // Functional Component responsible for post new blogs via API POST
 // page format is a simple form
 const AddBlog: React.FC<IAddProps> = () => {
-  const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string>("");
+  const history = useHistory();
 
-  const post = () => {
+  const [title, setTitle] = React.useState<string>("");
+  const [content, setContent] = React.useState<string>("");
+
+  React.useEffect(() => {
+    if (!User || !User.userid || User.role !== "admin") {
+      history.push("/login");
+    }
+  });
+
+  const post = async () => {
     let blog = {
       title,
       content,
-      authorid: 1,
+      authorid: User.userid,
       tagid: parseInt(document.getElementsByTagName("select")[0].value),
     };
-    fetch("/api/blogs", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(blog),
-    });
-    history.back();
+    await apiService("/api/blogs", "POST", blog);
+    history.push("/");
   };
 
   return (

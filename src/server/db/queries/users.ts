@@ -18,7 +18,7 @@ const findOneById = async (id: number) => {
   return new Promise<IAuthor[]>((resolve, reject) => {
     Connection.query(
       `SELECT * FROM authors WHERE id = ? LIMIT 1`,
-      [id],
+      id,
       (err, results) => {
         if (err) reject(err);
         resolve(results);

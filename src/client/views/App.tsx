@@ -5,11 +5,12 @@ import {
   NavLink,
   Route,
 } from "react-router-dom";
-import AddBlog from "../components/AddBlog";
-import EditBlog from "../components/EditBlog";
+import AddBlog from "../components/admin/AddBlog";
+import EditBlog from "../components/admin/EditBlog";
 import Main from "./Main";
 import ViewBlog from "./ViewBlog";
 import ViewTaggedBlogs from "./ViewTaggedBlogs";
+import Login from "../components/admin/Login";
 
 // Main Functional Component that renders main page with main content routes
 const App: React.FC<IAppProps> = () => {
@@ -28,21 +29,22 @@ const App: React.FC<IAppProps> = () => {
             Home
           </NavLink>
           <NavLink
-            to="/add"
+            to="/admin"
             className="nav-link text-dark mx-1"
             activeClassName="activeLink"
             id="addLink"
           >
-            Add Post
+            Admin
           </NavLink>
         </div>
       </div>
       <Switch>
         <Route exact path="/" component={Main}></Route>
-        <Route path="/add" component={AddBlog}></Route>
+        <Route path="/admin" component={AddBlog}></Route>
         <Route path="/blog/edit/:id" component={EditBlog}></Route>
         <Route path="/blog/:id" component={ViewBlog}></Route>
         <Route path="/view-tags/blogs/:id" component={ViewTaggedBlogs}></Route>
+        <Route path="/login" component={Login}></Route>
       </Switch>
     </Router>
   );

@@ -1,22 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { RouteComponentProps } from "react-router-dom";
+import React from "react";
+import { RouteComponentProps, useHistory } from "react-router-dom";
+import { apiService, User } from "../../utils/apiService";
 
-// Functional Component responsible for updating blog via API PUT request, deleting blog via API DELETE request 
+// Functional Component responsible for updating blog via API PUT request, deleting blog via API DELETE request
 // page format is a simple form
 const EditBlog: React.FC<IEditProps> = (props) => {
-  const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string>("");
+  const history = useHistory();
+
+  const [title, setTitle] = React.useState<string>("");
+  const [content, setContent] = React.useState<string>("");
 
   const getBlog = async () => {
-    let res = await fetch(`/api/blogs/${props.match.params.id}`);
-    let blog = await res.json();
-
+    let blog = await apiService(`/api/blogs/${props.match.params.id}`);
     setTitle(blog.title);
     setContent(blog.content);
   };
 
-  useEffect(() => {
-    getBlog();
+  React.useEffect(() => {
+    if (!User || !User.userid || User.role !== "admin") {
+      history.push("/login");
+    } else {
+      getBlog();
+    }
   }, [props.match.params.id]);
 
   const update = async () => {
@@ -24,21 +29,13 @@ const EditBlog: React.FC<IEditProps> = (props) => {
       title,
       content,
     };
-    await fetch(`/api/blogs/${props.match.params.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editedBlog),
-    });
-    history.back();
+    await apiService(`/api/blogs/${props.match.params.id}`, "PUT", editedBlog);
+    history.push("/");
   };
 
   const remove = async () => {
-    await fetch(`/api/blogs/${props.match.params.id}`, {
-      method: "DELETE",
-    });
-    history.go(-2);
+    await apiService(`/api/blogs/${props.match.params.id}`, "DELETE", {});
+    history.push("/");
   };
 
   return (

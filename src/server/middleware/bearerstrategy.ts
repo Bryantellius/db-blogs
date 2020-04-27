@@ -6,6 +6,7 @@ import db from "../db";
 
 passport.use(
   new BearerStrategy.Strategy(async (token, done) => {
+    console.log(`bearer strategy`);
     try {
       let payload = await ValidToken(token);
       let [user] = await db.Users.findOneById(payload.userid);

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, RouteComponentProps } from "react-router-dom";
-import { IBlog, ITag } from "../../utils/types";
+import { IBlog, ITag } from "../utils/types";
+import { apiService } from "../utils/apiService";
+import moment from 'moment';
 
 // Functional Component that fetches blog and associated tags and render as a main view page
 const ViewBlog: React.FC<IViewProps> = (props) => {
@@ -8,14 +10,12 @@ const ViewBlog: React.FC<IViewProps> = (props) => {
   const [tags, setTags] = useState<ITag[]>([]);
 
   const getBlog = async () => {
-    let res = await fetch(`/api/blogs/${props.match.params.id}`);
-    let blog = await res.json();
+    let blog = await apiService(`/api/blogs/${props.match.params.id}`);
     setBlog(blog);
   };
 
   const getTags = async () => {
-    let res = await fetch(`/api/tags/forBlogs/${props.match.params.id}`);
-    let tags = await res.json();
+    let tags = await apiService(`/api/tags/forBlogs/${props.match.params.id}`);
     setTags(tags[0]);
   };
 
@@ -45,7 +45,7 @@ const ViewBlog: React.FC<IViewProps> = (props) => {
           ))}
         </div>
         <h6 className="text-muted">By {blog?.author}</h6>
-        <span className="date">Written {blog?.date.slice(5, 10)}</span>
+          <span className="date">{moment(blog?.date).format("MMM Do YYYY")}</span>
         <hr></hr>
         <p>{blog?.content}</p>
         <hr></hr>
