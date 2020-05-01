@@ -7,10 +7,11 @@ import {
 } from "react-router-dom";
 import AddBlog from "../components/admin/AddBlog";
 import EditBlog from "../components/admin/EditBlog";
+import Login from "../components/admin/Login";
 import Main from "./Main";
 import ViewBlog from "./ViewBlog";
 import ViewTaggedBlogs from "./ViewTaggedBlogs";
-import Login from "../components/admin/Login";
+import Donate from "./Donate";
 
 // Main Functional Component that renders main page with main content routes
 const App: React.FC<IAppProps> = () => {
@@ -29,6 +30,14 @@ const App: React.FC<IAppProps> = () => {
             Home
           </NavLink>
           <NavLink
+            to="/donate"
+            className="nav-link text-dark mx-1"
+            activeClassName="activeLink"
+            id="addLink"
+          >
+            Donate
+          </NavLink>
+          <NavLink
             to="/admin"
             className="nav-link text-dark mx-1"
             activeClassName="activeLink"
@@ -45,6 +54,7 @@ const App: React.FC<IAppProps> = () => {
         <Route path="/blog/:id" component={ViewBlog}></Route>
         <Route path="/view-tags/blogs/:id" component={ViewTaggedBlogs}></Route>
         <Route path="/login" component={Login}></Route>
+        <Route path="/donate" component={Donate}></Route>
       </Switch>
     </Router>
   );
