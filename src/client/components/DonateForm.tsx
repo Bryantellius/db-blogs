@@ -16,7 +16,7 @@ const DonateForm: React.FC<IDonateFormProps> = (props) => {
     e.preventDefault();
     try {
       let { token } = await props.stripe.createToken({ name });
-      await apiService(`/api/donate`, "POST", { token, amount });
+      await apiService(`/api/donate`, "POST", { items: [{ id: "donation"}], currency: "usd" });
       console.log(token);
       history.push("/");
     } catch (e) {
