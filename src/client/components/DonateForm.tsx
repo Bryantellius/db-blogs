@@ -1,19 +1,24 @@
 import * as React from "react";
+import { apiService } from "../utils/apiService";
 import {
   CardElement,
   injectStripe,
   ReactStripeElements,
 } from "react-stripe-elements";
+import { useHistory } from "react-router-dom";
 
 const DonateForm: React.FC<IDonateFormProps> = (props) => {
   const [name, setName] = React.useState<string>("");
   const [amount, setAmount] = React.useState<string>("");
+  const history = useHistory();
 
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      let token = await props.stripe.createToken({ name });
+      let { token } = await props.stripe.createToken({ name });
+      await apiService(`/api/donate`, "POST", { token, amount });
       console.log(token);
+      history.push("/");
     } catch (e) {
       throw e;
     }
@@ -26,7 +31,9 @@ const DonateForm: React.FC<IDonateFormProps> = (props) => {
         className="mt-3 p-3 border-dark shadow rounded"
         onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => handleSubmit(e)}
       >
-        <h3 className="mb-2 p-2 border-bottom border-info w-50 mx-auto">Enjoy our content? Donate today.</h3>
+        <h3 className="mb-2 p-2 border-bottom border-info w-50 mx-auto">
+          Enjoy our content? Donate today.
+        </h3>
         <div className="form-group w-50 mx-auto">
           <label>
             <u>Name:</u>
