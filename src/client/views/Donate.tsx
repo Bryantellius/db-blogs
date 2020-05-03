@@ -1,16 +1,17 @@
-import * as React from 'react';
-import { StripeProvider, Elements } from 'react-stripe-elements';
-import DonateForm from '../components/DonateForm';
+import * as React from "react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import DonateForm from "../components/DonateForm";
+
+const stripePromise = loadStripe("pk_test_5kZ8Jqphhgho6KtqLWCQjeap001MKHsi38");
 
 export const Donate: React.FC<IDonateProps> = () => {
-    return (
-        <StripeProvider apiKey="pk_test_5kZ8Jqphhgho6KtqLWCQjeap001MKHsi38">
-            <Elements>
-                <DonateForm />
-            </Elements>
-        </StripeProvider>
-    )
-}
+  return (
+    <Elements stripe={stripePromise}>
+      <DonateForm />
+    </Elements>
+  );
+};
 
 interface IDonateProps {}
 
