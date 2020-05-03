@@ -23,8 +23,8 @@ const Main: React.FC<IMainProps> = () => {
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">
       <div className="alert alert-dark w-100 text-muted">Hello World!</div>
-      <div className="row border border dark shadow w-100">
-        <div className="col-md-4 border border-dark d-flex flex-column justify-content-start">
+      <div className="row shadow w-100">
+        <div className="col-md-4 d-flex flex-column justify-content-start">
           <div className="btn-group bg-dark p-2">
             <button
               className="btn btn-outline-light btn-sm"
@@ -42,7 +42,7 @@ const Main: React.FC<IMainProps> = () => {
           <News />
           <Tags />
         </div>
-        <div className="col-md-8 border border-dark">
+        <div className="col-md-8">
           <div className="alert alert-dark text-center shadow-sm">
             <h4>Latest Posts</h4>
           </div>

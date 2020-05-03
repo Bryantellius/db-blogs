@@ -19,6 +19,7 @@ router.post("/create-payment-intent", async (req, res, next) => {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: calculateOrderAmount(items),
     currency,
+    metadata: { integration_check: "accept_a_payment" },
   });
   res.send({
     publishableKey: config.stripe.stripe_pk,

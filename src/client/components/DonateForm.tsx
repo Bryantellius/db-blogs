@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useElements, useStripe, CardElement } from "@stripe/react-stripe-js";
+import { Alert, InputGroup, FormControl } from "react-bootstrap";
 import { apiService } from "../utils/apiService";
 
 const CARD_ELEMENT_OPTIONS = {
@@ -20,9 +21,11 @@ const CARD_ELEMENT_OPTIONS = {
   },
 };
 
-const DonateForm: React.FC<IDonateFormProps> = (props) => {
+const DonateForm: React.FC<IDonateFormProps> = () => {
   const [name, setName] = React.useState<string>("");
   const [amount, setAmount] = React.useState<string>("");
+  const [error, setError] = React.useState<string>("An Error has occurred.");
+
   const stripe = useStripe();
   const elements = useElements();
 
@@ -35,10 +38,14 @@ const DonateForm: React.FC<IDonateFormProps> = (props) => {
       return;
     }
 
-    let data: any = await apiService("/api/donate/create-payment-intent", "POST", {
-      items: amount,
-      currency: "usd",
-    });
+    let data: any = await apiService(
+      "/api/donate/create-payment-intent",
+      "POST",
+      {
+        items: amount,
+        currency: "usd",
+      }
+    );
 
     const result = await stripe.confirmCardPayment(data.clientSecret, {
       payment_method: {
@@ -52,21 +59,44 @@ const DonateForm: React.FC<IDonateFormProps> = (props) => {
     if (result.error) {
       // Show error to your customer (e.g., insufficient funds)
       console.log(result.error.message);
+      setError(result.error.message);
+      document.getElementById("failureAlert").hidden = false;
     } else {
       // The payment has been processed!
       if (result.paymentIntent.status === "succeeded") {
         // Show a success message to your customer
+        console.log("Successful payment");
+        document.getElementById("successAlert").hidden = false;
+        setName("");
+        setAmount("");
         // There's a risk of the customer closing the window before callback
         // execution. Set up a webhook or plugin to listen for the
         // payment_intent.succeeded event that handles any business critical
         // post-payment actions.
-        console.log("Successful payment");
       }
     }
   };
 
   return (
     <main className="container">
+      <Alert
+        id="successAlert"
+        variant="success"
+        onClose={() => (document.getElementById("successAlert").hidden = true)}
+        hidden
+        dismissible
+      >
+        Payment Successful.
+      </Alert>
+      <Alert
+        id="failureAlert"
+        variant="danger"
+        onClose={() => (document.getElementById("failureAlert").hidden = true)}
+        hidden
+        dismissible
+      >
+        {error}
+      </Alert>
       <form
         className="mt-3 p-3 border-dark shadow rounded"
         onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => handleSubmit(e)}
@@ -78,9 +108,9 @@ const DonateForm: React.FC<IDonateFormProps> = (props) => {
           <label>
             <u>Name:</u>
           </label>
-          <input
+          <FormControl
             type="text"
-            className="form-control"
+            placeholder="Name as it appears on Card"
             value={name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setName(e.target.value)
@@ -91,14 +121,21 @@ const DonateForm: React.FC<IDonateFormProps> = (props) => {
           <label>
             <u>Amount:</u>
           </label>
-          <input
-            type="text"
-            className="form-control"
-            value={amount}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setAmount(e.target.value)
-            }
-          />
+          <InputGroup>
+            <InputGroup.Prepend>
+              <InputGroup.Text>$</InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl
+              type="text"
+              value={amount}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setAmount(e.target.value)
+              }
+            />
+            <InputGroup.Append>
+              <InputGroup.Text>.00</InputGroup.Text>
+            </InputGroup.Append>
+          </InputGroup>
         </div>
         <div className="form-group w-50 mx-auto">
           <label>
