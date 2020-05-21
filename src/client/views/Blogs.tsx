@@ -21,15 +21,15 @@ const Blogs: React.FC<IBlogsProps> = () => {
       {blogs.map((blog) => {
         return (
           <div
-            className="border-left border-right p-3 my-3 blogs"
+            className="border-left border-right p-3 my-3 w-75 mx-auto blogs"
             key={`${blog.id}-${blog.author}-${blog.date}`}
           >
-            <NavLink to={`/blog/${blog.id}`} className="nav-link text-dark">
-              <h5>{blog.title}</h5>
+            <NavLink to={`/blog/${blog.id}`} className="nav-link pl-0 text-dark">
+              <h3>{blog.title}</h3>
             </NavLink>
             <h6 className="text-muted">By {blog.author}</h6>
             <hr></hr>
-            <span className="date">{blog.content.slice(0, 15)}...</span>
+            <span className="date">{blog.content.slice(0, 100)}...</span>
           </div>
         );
       })}

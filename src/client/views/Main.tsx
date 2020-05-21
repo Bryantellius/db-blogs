@@ -46,7 +46,7 @@ const Main: React.FC<IMainProps> = () => {
           <div className="alert alert-dark text-center shadow-sm">
             <h4>Latest Posts</h4>
           </div>
-          <div className="d-flex flex-wrap justify-content-around p-2">
+          <div className="p-2">
             <Blogs />
           </div>
         </div>
